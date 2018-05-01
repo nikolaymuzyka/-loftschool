@@ -1,0 +1,81 @@
+<!-- 
+ ПРЕДСТАВЛЕНИЕ ВЫРАЖЕНИЯ БРАУЗЕРОМ
+var a = 1 + 1;
+- parsing
+	- var
+	- a
+	- =
+	- 1
+	- +
+	- 1
+	- ;
+
+
+AST (abstract sintax tree)  абстрактное синтаксическое дерево
+
+- lexer
+	-variable declaration (var)
+		-identifier (a)
+		-init (a)
+			- binary operation (+)
+			- literal (1)
+			- literal (1)
+
+
+
+
+
+- execution выполнение
+	
+ -->
+
+
+ source code(ES 2015+) исходный код
+
+
+	script1.js|
+	script1.js| - scripts.js после bundling
+	script1.js|
+	style1.css|
+	style2.css| - styles.css
+	style3.css|
+	image1.png
+	image2.png
+
+
+
+
+- transpiling(babel) -> ES 5 транспиляция
+- minifying (JS, CSS,PNG) минификация
+- bundling  объединение файлов
+- testing
+
+
+
+ production
+
+	scripts.js| 
+	styles.css| - отправляется на продакшн
+	image1.png|
+	image2.png|
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var a = 1 + 1;
+	</script>
+	
+</body>
+</html>
