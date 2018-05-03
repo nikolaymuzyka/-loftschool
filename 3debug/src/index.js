@@ -10,6 +10,19 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
+	if (!Array.isArray(array) || (array.length === 0)) {
+		throw new Error('empty array')
+	}
+	if (typeof(fn) !== 'function') {
+		throw new Error('fn is not a function');
+	}
+	
+	var count = 0;
+	for (var i = 0; i < array.length; i++) {
+		if(fn(array[i])) count++;
+	}
+	if (count === array.length) return true;
+		else return false
 }
 
 /*
@@ -22,6 +35,19 @@ function isAllTrue(array, fn) {
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isSomeTrue(array, fn) {
+	if (!Array.isArray(array) || (array.length === 0)) {
+		throw new Error('empty array')
+	}
+	if (typeof(fn) !== 'function') {
+		throw new Error('fn is not a function');
+	}
+	
+	var count = 0;
+	for (var i = 0; i < array.length; i++) {
+		if(fn(array[i])) count++;
+	}
+	if (count) return true;
+		else return false
 }
 
 /*
@@ -33,6 +59,20 @@ function isSomeTrue(array, fn) {
  - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
+	if (typeof(fn) !== 'function') {
+		throw new Error('fn is not a function');
+	}
+
+	var arr = [].slice.call(arguments, 1);
+	var result = [];
+	for (var i = 0; i < arr.length; i++) {
+		try {
+			fn(arr[i]);
+		} catch(e){
+			result.push(arr[i]);
+		}
+	}
+	return result;
 }
 
 /*
@@ -49,7 +89,45 @@ function returnBadArguments(fn) {
  - number не является числом (с текстом "number is not a number")
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
+function calculator(number=0) {
+	if (isNaN(number)) {
+		throw new Error('number is not a number')
+	};
+
+	var obj = {
+		sum : function() {
+			for (var i = 0; i < arguments.length; i++) {
+				number += arguments[i];
+			}
+			return number;
+		},
+
+		dif : function() {
+			for (var i = 0; i < arguments.length; i++) {
+				number -= arguments[i];
+			}
+			return number;
+		},
+
+		div : function() {
+			if([].slice.call(arguments, 0).indexOf(0) > -1) {
+				throw new Error('division by 0');
+			};
+
+			for (var i = 0; i < arguments.length; i++) {
+				number /= arguments[i];
+			}
+			return number;
+		},
+
+		mul : function() {
+			for (var i = 0; i < arguments.length; i++){
+				number *= arguments[i];
+			}
+			return number;
+		}
+	}
+	return obj;
 }
 
 export {

@@ -1,4 +1,4 @@
-function div(a, b) {	
+function div(a, b) {
 	if (b === 0) {
 		throw new Error('нельзя делить на 0');
 	}	
