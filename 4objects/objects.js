@@ -74,3 +74,49 @@ var object = {some: 'value'};
 // toString, valueOf - служебные методы
 
 console.log(obj + 'hellow', obj.toString() + 'hellow');
+// последоовательность приведения типов
+// obj + *
+//сначала вызывается
+//valueOf() его мы можем переопределить
+//если не получилось, то выполняется
+//toString() приводит к строке
+
+// var obj1 = {
+// 	prop1: 'value1',
+// 	prop2: 'value2'
+// },
+// obj2 = {
+// 	prop1: 'value1',
+// 	prop2: 'value2'
+// };
+// var count = 0;
+// if (Object.keys(obj1).length === Object.keys(obj2).length) {
+// 	for(const prop in obj1){
+// 		if (obj1[prop] === obj2[prop]) {
+// 			count++;
+// 		};
+// 	}
+// 	if (count === Object.keys(obj1).length) {
+// 		console.log('Объекты равны');
+// 	} else {console.log('Объекты не равны');}
+// };
+obj = {};
+
+function createProxy(obj) {
+	return new Proxy(obj, {
+		get(target, prop) {
+	    return target[prop];
+	  },
+	  set(target, prop, value) {
+	    target[prop] = value * value;
+	    return true;
+	  }
+	});
+};
+
+obj = createProxy(obj);
+
+obj.a = 2;
+obj.b = 5;
+
+console.log(obj.a, obj.b)
